@@ -1,0 +1,42 @@
+﻿.mGrid { background-color: #fff; margin: 5px 0 10px 0; border: solid 1px #525252; border-collapse:collapse; }
+    .mGrid td { border: solid 1px #c1c1c1; color: #717171; }
+    .mGrid td a { color: black }
+    .mGrid th { color: #fff; background: #424242 url('grd_head.png') repeat-x top; border-left: solid 1px #525252; font-size: 0.9em; }
+.mGrid .alt { background: #fcfcfc url('grd_alt.png') repeat-x top; }
+.mGrid .pgr {background: #424242 url('grd_pgr.png') repeat-x top; }
+    .mGrid .pgr table { margin: 5px 0; }
+    .mGrid .pgr td { border-width: 0; padding: 0 6px; border-left: solid 1px #666; font-weight: bold; color: #fff; line-height: 12px; }   
+    .mGrid .pgr a { color: #666; text-decoration: none; }
+    .mGrid .pgr a:hover { color: #000; text-decoration: none; }
+
+ .button {
+   border-top: 1px solid #635c63;
+   background: #bab6ba;
+   background: -webkit-gradient(linear, left top, left bottom, from(#878787), to(#bab6ba));
+   background: -webkit-linear-gradient(top, #878787, #bab6ba);
+   background: -moz-linear-gradient(top, #878787, #bab6ba);
+   background: -ms-linear-gradient(top, #878787, #bab6ba);
+   background: -o-linear-gradient(top, #878787, #bab6ba);
+   padding: 8.5px 17px;
+   -webkit-border-radius: 10px;
+   -moz-border-radius: 10px;
+   border-radius: 10px;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   box-shadow: rgba(0,0,0,1) 0 1px 0;
+   text-shadow: rgba(0,0,0,.4) 0 1px 0;
+   color: #000000;
+   font-size: 14px;
+   font-family: Helvetica, Arial, Sans-Serif;
+   text-decoration: none;
+   vertical-align: middle;
+   }
+.button:hover {
+   border-top-color: #8f8f8f;
+   background: #8f8f8f;
+   color: #000000;
+   }
+.button:active {
+   border-top-color: #001421;
+   background: #001421;
+   }

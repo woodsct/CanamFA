@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="CanamLiveFAdb-Web.config Connection String" description="CanamLiveFAdb Connection String used in web.config by the application to access the database." defaultValue="Data Source=CRAIG-DESKTOP\STRATLIVEFA;Initial Catalog=CanamStratdb;Integrated Security=True;User Id=CanAm;password=Go123!abcd;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Craig\\documents\\visual\ studio\ 2013\\Projects\\CanamLiveFA\\CanamLiveFA\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='CanamLiveFAdb']/@connectionString" />
+  </parameter>
+</parameters>

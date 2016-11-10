@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <setParameter name="IIS Web Application Name" value="Default Web Site/" />
+  <setParameter name="IIS Web Application Pool Name" value="ASP.NET v4.0" />
+  <setParameter name="IisVirtualDirectoryPhysicalPath" value="C:\Users\Craig\documents\visual studio 2013\Projects\CanamLiveFA\CanamLiveFA_deploy" />
+  <setParameter name="CanamLiveFAdb-Web.config Connection String" value="Data Source=CRAIG-DESKTOP\STRATLIVEFA;Initial Catalog=CanamStratdb;Integrated Security=True;User Id=CanAm;password=Go123!abcd;" />
+</parameters>

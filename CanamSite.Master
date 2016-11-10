@@ -1,0 +1,27 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="CanamSite.master.cs" Inherits="CanamLiveFA.CanamSite" %>
+<%@ Register TagPrefix="CLFA" TagName="UserInfo" Src="~/Controls/UserInfo.ascx"  %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Canam Live FA</title>
+    <link type="text/css" rel="Stylesheet" href="css/style.css" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body style="background: #E62D33 url('images/Baseball-Background-Baseballstadium.jpeg') repeat-y 50% top; background-size:1920px,1080px; margin-top:10%; margin-left:10%; margin-right:10%">
+    <form id="form1" runat="server">
+    <div style="width:100%; align-content:center;">
+        <asp:PlaceHolder ID="plcUserInfo" runat="server" >
+            <CLFA:UserInfo runat="Server" ></CLFA:UserInfo>
+        </asp:PlaceHolder>
+    </div>
+    <div style="width:100%; align-content:center;height:0%">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server" >
+        
+            </asp:ContentPlaceHolder>
+    </div>
+    </form>
+</body>
+</html>
