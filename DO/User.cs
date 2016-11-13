@@ -14,18 +14,20 @@ namespace CanamLiveFA.DO
         private int m_UserId;
         private string m_Password;
         private bool m_Commissioner;
+        private int m_qualifyingFreeAgentAvailable;
 
         public User()
         {
         }
 
-        public void PopulateUser(int UserId, string userName, Enums.Team team, string password, bool commissioner)
+        public void PopulateUser(int UserId, string userName, Enums.Team team, string password, bool commissioner, int qualifyingFreeAgentAvailable)
         {
             m_UserId = UserId;
             m_UserName = userName;
             m_Team = team;
             m_Password = password;
             m_Commissioner = commissioner;
+            m_qualifyingFreeAgentAvailable = qualifyingFreeAgentAvailable;
         }
 
         public string UserName
@@ -61,6 +63,11 @@ namespace CanamLiveFA.DO
         public bool Commissioner
         {
             get { return m_Commissioner; }
+        }
+
+        public int QualifyingFreeAgentAvailable
+        {
+            get { return m_qualifyingFreeAgentAvailable; }
         }
     }
 }

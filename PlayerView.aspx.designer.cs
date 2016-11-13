@@ -22,6 +22,15 @@ namespace CanamLiveFA {
         protected global::System.Web.UI.WebControls.Label lblPlayerName;
         
         /// <summary>
+        /// timeLeft control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label timeLeft;
+        
+        /// <summary>
         /// plcBidChart control.
         /// </summary>
         /// <remarks>
@@ -38,6 +47,24 @@ namespace CanamLiveFA {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblPlayerBids;
+        
+        /// <summary>
+        /// plcQualified control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder plcQualified;
+        
+        /// <summary>
+        /// lblQualified control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblQualified;
         
         /// <summary>
         /// grdPlayerBids control.

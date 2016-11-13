@@ -23,7 +23,10 @@ namespace CanamLiveFA
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(txtPlayerEndTime.Text))
-                BLL.CommonFunctions.SetApplicationValue("Player Reset", txtPlayerEndTime.Text);
+            {
+                BLL.CommonFunctions.SetApplicationValue("Player Reset", double.Parse(txtPlayerEndTime.Text));
+                DAL.Player.StartFreeAgency();
+            }
             else if (BLL.CommonFunctions.GetApplicationValue("Player Reset") != null)
                 BLL.CommonFunctions.RemoveApplicationValue("Player Reset");
             Response.Redirect(Request.RawUrl);

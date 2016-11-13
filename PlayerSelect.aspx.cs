@@ -23,10 +23,11 @@ namespace CanamLiveFA
 
             if (BLL.CommonFunctions.GetApplicationValue("Player Reset") != null)
             {
+                DAL.Player.SignExpiredPlayers((double)(BLL.CommonFunctions.GetApplicationValue("Player Reset")));
                 grdUserPlayers.Columns[3].Visible = true;
                 grdUserPlayers.Columns[4].Visible = true;
                 plcUnsignedPlayers.Visible = true;
-                grdUnsignedPlayers.DataSource = DAL.Player.GetAllPlayers(userObj);
+                grdUnsignedPlayers.DataSource = DAL.Player.GetAllPlayers(false);
                 grdUnsignedPlayers.DataBind();
                 DataTable signedPlayers = DAL.Player.GetAllSignedPlayers();
                 
@@ -42,9 +43,8 @@ namespace CanamLiveFA
         protected void grdUnsignedPlayers_Sorting(object sender, GridViewSortEventArgs e)
         {
             DO.User userObj = (DO.User)BLL.CommonFunctions.GetSessionValue("User");
-            DataTable dt = DAL.Player.GetAllPlayers(userObj);
-            dt = (BLL.CommonFunctions.GetApplicationValue("Player Reset") == null) ?
-                 DAL.Player.GetAllPlayersByTeam(userObj) : dt = DAL.Player.GetAllPlayers(userObj);
+            DataTable dt = (BLL.CommonFunctions.GetApplicationValue("Player Reset") == null) ?
+                 DAL.Player.GetAllPlayersByTeam(userObj) : DAL.Player.GetAllPlayers(false);
 
             if (dt != null)
             {

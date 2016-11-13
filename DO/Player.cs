@@ -12,16 +12,19 @@ namespace CanamLiveFA.DO
         private Enums.Team m_currentTeam;
         private bool m_majors;
         private bool m_signed;
-        private double m_preBlindBid;
+        private DateTime m_bidTime;
+        private bool m_qualified;
 
-        public void PopulatePlayer(int id, string name, Enums.Team currentTeam, bool majors, bool signed, double preBlindBid)
+        public void PopulatePlayer(int id, string name, Enums.Team currentTeam, bool majors, bool signed, DateTime bidTime, bool qualified)
         {
             m_Id = id;
             m_playerName = name;
             m_currentTeam = currentTeam;
             m_majors = majors;
             m_signed = signed;
-            m_preBlindBid = preBlindBid;
+            m_bidTime = bidTime;
+            m_qualified = qualified;
+
         }
 
         public int Id
@@ -73,11 +76,19 @@ namespace CanamLiveFA.DO
             }
         }
 
-        public double PreBlindBid
+        public DateTime BidTime
         {
             get
             {
-                return m_preBlindBid;
+                return m_bidTime;
+            }
+        }
+
+        public bool Qualified
+        {
+            get
+            {
+                return m_qualified;
             }
         }
     }

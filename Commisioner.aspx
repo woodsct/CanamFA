@@ -14,7 +14,7 @@
                 </td>
                 <td width="33%" align="center">
                     <asp:Label ID="lblPlayerEndTime" runat="server" Text="Player Reset Hours"></asp:Label>
-                    <asp:TextBox ID="txtPlayerEndTime" runat="server" TextMode="Number" ></asp:TextBox>
+                    <asp:TextBox ID="txtPlayerEndTime" runat="server" TextMode="Number" step="0.01" ></asp:TextBox>
                     
                     <br />
                     <asp:Button ID="btnSubmit" runat="server" Text="Submit" OnClick="btnSubmit_Click" />

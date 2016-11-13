@@ -15,6 +15,27 @@
 
             document.getElementById('<%=lblTotalContractValue.ClientID%>').innerHTML = '$' + parseInt(value, 0);
         }
+
+        function TimeRemaining(endTime) {
+            var clock = document.getElementById('<%=timeLeft.ClientID%>');
+
+            function updateTime() {
+                var timeRemaining = Date.parse(endTime) - Date.now()
+                var seconds = Math.floor((timeRemaining / 1000) % 60);
+                var minutes = Math.floor((timeRemaining / 1000 / 60) % 60);
+                var hours = Math.floor((timeRemaining / (1000 * 60 * 60)) % 24);
+                clock.innerHTML = hours + ':' + minutes + ':' + seconds;
+
+                if (seconds < 0) {
+                    clock.innerHTML = 'Time has expired';
+                    clock.style.color = 'red';
+                    clearInterval(timeinterval);
+                }
+            }
+
+            updateTime();
+            var timeinterval = setInterval(updateTime, 1000);
+        }
     </script>
     <div style="background-color:white">
         <table>
@@ -29,8 +50,15 @@
                         Choose Number of years from the drop down box and enter theAmount per Year in the correct box. When ready click Place Bid.<br />
                         <br />
                         <br />
+                        <asp:Label runat="server" Text="Time Remaining:" />
+                        <asp:Label runat="server" ID="timeLeft" Font-Bold="true" />
+                        <br />
                         <asp:PlaceHolder ID="plcBidChart" runat="server">
                             <asp:Label ID="lblPlayerBids" runat="server" Text="----------------Current Bids----------------"></asp:Label>
+                            <br />
+                            <asp:PlaceHolder ID="plcQualified" runat="server" Visible="false">
+                                <asp:Label ID="lblQualified" runat="server" Text="PLAYER IS QUALIFIED" ForeColor="Red" Font-Bold="true"></asp:Label>
+                            </asp:PlaceHolder>
                             <br />
                             <asp:GridView ID="grdPlayerBids" runat="server" AllowPaging="true" CellPadding="5" AutoGenerateColumns="false" OnPageIndexChanging="grdPlayerBids_PageIndexChanging"
                                 CssClass="mGrid" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt">

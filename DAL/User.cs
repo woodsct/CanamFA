@@ -66,7 +66,8 @@ namespace CanamLiveFA.DAL
             string password = GetStringValue(sqlReader["UPassword"]);
             Enums.Team team = (Enums.Team)Enum.Parse(typeof(Enums.Team), GetStringValue(sqlReader["UTeam"]));
             bool commissioner = GetBooleanValue(sqlReader["UCommissioner"]);
-            userObj.PopulateUser(userId, userName, team, password, commissioner);
+            int qualifyingFreeAgentAvailable = GetIntValue(sqlReader["UQualifyingFAsAvailable"]);
+            userObj.PopulateUser(userId, userName, team, password, commissioner, qualifyingFreeAgentAvailable);
             return userObj;
         }
     }

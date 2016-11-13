@@ -27,8 +27,9 @@ namespace CanamLiveFA.DAL
                     Enums.Team currentTeam = (Enums.Team)Enum.Parse(typeof(Enums.Team), GetStringValue(sqlReader["PCurrentTeam"]));
                     bool majors = GetBooleanValue(sqlReader["PMajors"]);
                     bool signed = GetBooleanValue(sqlReader["PSigned"]);
-                    double preBlindValue = GetDoubleValue(sqlReader["PPreBlindBid"]);
-                    playerObj.PopulatePlayer(playerId, playerName, currentTeam, majors, signed, preBlindValue);
+                    DateTime bidTime = GetDateValue(sqlReader["PBidTime"]);
+                    bool qualified = GetBooleanValue(sqlReader["PQualifyingOffer"]);
+                    playerObj.PopulatePlayer(playerId, playerName, currentTeam, majors, signed, bidTime, qualified);
                     playerObj.HighestBid = GetDoubleValue(sqlReader["PHighestBid"]);
                     playerObj.HomeTeamBid = GetDoubleValue(sqlReader["PHomeTeamBid"]);
                     playerObj.HomeTeamRightToMatch = GetBooleanValue(sqlReader["PHomeTeamMatch"]);
@@ -105,11 +106,11 @@ namespace CanamLiveFA.DAL
             return dtable;
         }
 
-        public static DataTable GetAllPlayers(DO.User userObj)
+        public static DataTable GetAllPlayers(bool signed)
         {
             Hashtable inparameters = new Hashtable();
-            inparameters.Add("team", (int)userObj.Team);
-            DataTable dtable = SelectDataInDataTable("GetAllPlayersForTeam", inparameters, null);
+            inparameters.Add("signed", signed);
+            DataTable dtable = SelectDataInDataTable("GetAllPlayers", inparameters, null);
             dtable.Columns.Add("TeamName");
             dtable.Columns.Add("PlayerLevel");
             dtable.Columns.Add("BiddingTeam");
@@ -163,22 +164,8 @@ namespace CanamLiveFA.DAL
                 else
                     drow["PlayerLevel"] = "Dev";
                 double contractValue = double.Parse(drow["Bid"].ToString());
-                if (drow["SigningTeam"].ToString() == drow["Team"].ToString())
-                    drow["Compensation"] = "None";
-                else if (contractValue > 10000)
-                    drow["Compensation"] = "1st + " + contractValue * 0.1;
-                else if (contractValue > 6000 && contractValue <= 10000)
-                    drow["Compensation"] = "1st";
-                else if (contractValue > 4000 && contractValue <= 6000)
-                    drow["Compensation"] = "2nd";
-                else if (contractValue > 3000 && contractValue <= 4000)
-                    drow["Compensation"] = "3rd";
-                else if (contractValue > 2000 && contractValue <= 30000)
-                    drow["Compensation"] = "4th";
-                else if (contractValue > 1000 && contractValue <= 20000)
-                    drow["Compensation"] = "5th";
-                else
-                    drow["Compensation"] = "None";
+                if (drow["SigningTeam"].ToString() != drow["Team"].ToString() && (bool)drow["QualifyingOffer"])
+                    drow["Compensation"] = "Qualified Pick";
             }
             return dtable;
         }
@@ -201,11 +188,24 @@ namespace CanamLiveFA.DAL
             ExecuteProcedure("SignAllPlayers", null, null);
         }
 
+        public static void SignExpiredPlayers(double hoursToExpiry)
+        {
+            int secondsToExpiry = (int)(hoursToExpiry * 3600);
+            Hashtable inParameters = new Hashtable();
+            inParameters.Add("secondsToExpiry", secondsToExpiry);
+            ExecuteProcedure("SignExpiredPlayers", inParameters, null);
+        }
+
         public static void match(int playerId)
         {
             Hashtable inParameters = new Hashtable();
             inParameters.Add("playerId", playerId);
             ExecuteProcedure("Match", inParameters, null);
+        }
+
+        public static void StartFreeAgency()
+        {
+            ExecuteProcedure("startFreeAgency", null, null);
         }
     }
 }

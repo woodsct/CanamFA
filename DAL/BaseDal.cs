@@ -35,6 +35,14 @@ namespace CanamLiveFA.DAL
             return returnValue;
         }
 
+        protected static DateTime GetDateValue(object obj)
+        {
+            DateTime returnValue = new DateTime();
+            if (!obj.Equals(DBNull.Value))
+                returnValue = DateTime.Parse(obj.ToString());
+            return returnValue;
+        }
+
         protected static bool GetBooleanValue(object obj)
         {
             bool returnValue = false;
