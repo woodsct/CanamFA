@@ -17,6 +17,10 @@ namespace CanamLiveFA
             {
                 DO.User userObj = (DO.User)BLL.CommonFunctions.GetSessionValue("User");
                 Player currentPlayer = DAL.Player.GetPlayer(int.Parse(Request.QueryString.Get("Id")));
+                if (!IsPostBack) {
+                    int[] teamsNotified = DAL.Player.GetNotifiedTeams(currentPlayer.Id);
+                    chkEmailNotify.Checked = teamsNotified.Contains((int)userObj.Team);
+                }
                 plcQualified.Visible = currentPlayer.Qualified;
                 lblPlayerName.Text = currentPlayer.PlayerName;
                 
@@ -73,6 +77,10 @@ namespace CanamLiveFA
 
                         if (string.IsNullOrWhiteSpace(errorStr))
                         {
+                            DAL.Player.ChangeNotificationStatus(int.Parse(Request.QueryString.Get("Id")), (int)userObj.Team, true);
+                            currentPlayer = DAL.Player.GetPlayer(currentPlayer.Id);
+                            string[] toEmails = BLL.CommonFunctions.GetTeamEmails(DAL.Player.GetNotifiedTeams(currentPlayer.Id));
+                            BLL.CommonFunctions.MailMessage("A new bid has been placed on " + currentPlayer.PlayerName + " for total contract value " + currentPlayer.HighestBid + " at " + currentPlayer.BidTime, "New high bid on " + currentPlayer.PlayerName, toEmails);
                             lblError.Text = "Bid Successfully Entered!!";
                             plcError.Visible = true;
                         }
@@ -123,6 +131,12 @@ namespace CanamLiveFA
         protected void btnMatch_Click(object sender, EventArgs e)
         {
             Contracts.match(int.Parse(Request.QueryString.Get("Id")));
+        }
+
+        protected void chkEmailNotify_CheckedChanged(object sender, EventArgs e)
+        {
+            DO.User userObj = (DO.User)BLL.CommonFunctions.GetSessionValue("User");
+            DAL.Player.ChangeNotificationStatus(int.Parse(Request.QueryString.Get("Id")), (int)userObj.Team, chkEmailNotify.Checked);
         }
     }
 }

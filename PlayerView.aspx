@@ -119,7 +119,7 @@
                 <td width="200px">
                     <div style="padding-left:20px;background-color:white;">
                         <asp:Label runat="server">Receive Email Notification</asp:Label>
-                        <asp:CheckBox runat="server" ID="chkEmailNotify" />
+                        <asp:CheckBox runat="server" ID="chkEmailNotify" OnCheckedChanged="chkEmailNotify_CheckedChanged" AutoPostBack="true" />
                         <br />
                         <br />
                         Yearly Minimums <br />

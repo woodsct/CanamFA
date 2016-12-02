@@ -27,7 +27,9 @@ namespace CanamLiveFA
                 plcError.Visible = true;
             }
             else if (BLL.User.LoginUser(txtUserName.Text, txtPassword.Text))
+            {
                 Response.Redirect("~/PlayerSelect.aspx");
+            }
             else
             {
                 lblError.Text = "Your username and password do not match";

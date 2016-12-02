@@ -207,5 +207,41 @@ namespace CanamLiveFA.DAL
         {
             ExecuteProcedure("startFreeAgency", null, null);
         }
+
+        public static void ChangeNotificationStatus(int playerId, int teamId, bool notify)
+        {
+            Hashtable inParameters = new Hashtable();
+            inParameters.Add("playerId", playerId);
+            inParameters.Add("teamId", teamId);
+            inParameters.Add("notify", notify);
+            ExecuteProcedure("ChangeNotificationStatus", inParameters, null);
+        }
+
+        public static int[] GetNotifiedTeams(int playerId)
+        {
+            Hashtable inParameters = new Hashtable();
+            inParameters.Add("playerId", playerId);
+            SqlDataReader sqlReader = SelectData("GetNotifiedTeams", inParameters, null);
+            List<int> teamIds = new List<int>();
+            try
+            {
+                while (sqlReader.Read())
+                {
+                    string teams = GetStringValue(sqlReader["PNotifiedTeams"]);
+                    foreach (string team in teams.Split(','))
+                    {
+                        int teamId;
+                        if (int.TryParse(team, out teamId))
+                            teamIds.Add(teamId);
+                    };
+                }
+            }
+            finally
+            {
+                sqlReader.Close();
+            }
+
+            return teamIds.ToArray();
+        }
     }
 }
